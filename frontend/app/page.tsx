@@ -9,6 +9,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { Clock, Trash2, Download } from "lucide-react"; // lucide-react usually available in shadcn setups
+import { Textarea } from "@/components/ui/textarea";
 
 // ---------- Types ----------
 type Role = "user" | "assistant" | "system";
@@ -114,7 +115,7 @@ export default function ChatPage() {
   });
 
   const scrollRef = useRef<HTMLDivElement | null>(null);
-  const inputRef = useRef<HTMLInputElement | null>(null);
+  const inputRef = useRef<HTMLTextAreaElement | null>(null);
 
   // Initialize from cache
   useEffect(() => {
@@ -260,7 +261,7 @@ export default function ChatPage() {
   };
 
   // UX helpers
-  const handleKeyDown: React.KeyboardEventHandler<HTMLInputElement> = (e) => {
+  const handleKeyDown: React.KeyboardEventHandler<HTMLTextAreaElement> = (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       sendMessage();
@@ -299,7 +300,7 @@ export default function ChatPage() {
               <div>
                 <CardTitle className="text-lg">LLM SANDBOX</CardTitle>
                 <p className="text-sm text-muted-foreground">
-                  Send prompts to the Repello agent and view cached history.
+                  Send prompts to the LLM agent and view cached history.
                 </p>
               </div>
             </div>
@@ -407,10 +408,10 @@ export default function ChatPage() {
                     e.preventDefault();
                     sendMessage();
                   }}
-                  className="flex gap-3 items-end"
+                  className="flex gap-3 items-center justify-center"
                 >
                   <div className="flex-1">
-                    <Input
+                    <Textarea
                       ref={inputRef}
                       placeholder="Ask the LLM agent anything..."
                       value={state.input}

@@ -1,0 +1,53 @@
+# yaml-language-server: $schema=https://promptfoo.dev/config-schema.json
+
+# Learn more about building a configuration: https://promptfoo.dev/docs/configuration/guide
+
+description: "LLM Sandbox Eval"
+
+prompts:
+  - 'Write a tweet about {{topic}}'
+  - 'Write a concise, funny tweet about {{topic}}'
+
+providers:
+  - id: https
+    config:
+      url: "http://localhost:3000/api/ask"
+      method: POST
+      headers:
+        Content-Type: application/json
+      body:
+        prompt: "{{prompt}}"
+      transformResponse: |
+        (response) => {
+          try {
+            const parsed = response.response;
+            return parsed; // only return the value
+          } catch (e) {
+            throw new Error("Failed to parse JSON: " + e.message + "\nRaw response: " + response);
+          }
+        }
+
+tests:
+  - vars:
+      topic: bananas
+    assert:
+      - type: icontains
+        value: banana
+      - type: javascript
+        value: "output.length <= 1000"
+
+  - vars:
+      topic: avocado toast
+    assert:
+      - type: icontains
+        value: avocado
+      - type: javascript
+        value: "output.length <= 2800"
+
+  - vars:
+      topic: new york city
+    assert:
+      - type: icontains
+        value: "nyc"
+      - type: javascript
+        value: "output.length <= 1000"
