@@ -1,0 +1,26 @@
+generator:
+  name: rest.RestGenerator
+  config:
+    base_url: "http://localhost:3000/api/ask"  # change if needed
+    request_method: POST
+    request_format: json
+    request_field: prompt
+    response_field: response
+    headers:
+      Content-Type: application/json
+
+probes:
+  - all    # run all probes
+
+detectors:
+  - all    # run all detectors
+
+runs:
+  n: 1
+  parallel: 5
+
+output:
+  formats:
+    - markdown
+    - json
+  output_dir: ./garak_results

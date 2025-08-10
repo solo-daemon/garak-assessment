@@ -1,0 +1,18 @@
+connector:
+  name: http
+  config:
+    url: "http://localhost:8000/api/ask"   # your endpoint
+    method: POST
+    request_field: prompt                  # JSON key for the prompt
+    response_field: response               # JSON key for the model reply
+    headers:
+      Content-Type: application/json
+    timeout: 60
+
+plugins:
+  probes: all
+  detectors: all
+
+runs:
+  n: 1
+  parallel: 5

@@ -1,0 +1,1 @@
+garak --model_type rest -G chat_service.json

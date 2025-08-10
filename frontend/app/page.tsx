@@ -10,6 +10,7 @@ import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { Clock, Trash2, Download } from "lucide-react"; // lucide-react usually available in shadcn setups
 import { Textarea } from "@/components/ui/textarea";
+import Markdown from 'react-markdown'
 
 // ---------- Types ----------
 type Role = "user" | "assistant" | "system";
@@ -223,7 +224,7 @@ export default function ChatPage() {
             patch: {
               text: "Malformed response from server.",
               error: "malformed_response",
-              durationMs,
+              durationMs: Math.round(performance.now() - start),
             },
           },
         });
@@ -237,7 +238,7 @@ export default function ChatPage() {
           id: assistantId,
           patch: {
             text: data.response,
-            durationMs,
+            durationMs: Math.round(performance.now() - start),
           },
         },
       });
@@ -372,7 +373,8 @@ export default function ChatPage() {
                                 : "bg-white text-slate-900 rounded-bl-none border"
                             }`}
                           >
-                            <div className="whitespace-pre-wrap">{m.text}</div>
+                            {m.role === "user" && (<div className="whitespace-pre-wrap">{m.text}</div> )}
+                            {m.role === "assistant" && ( <Markdown>{m.text}</Markdown> )}
                             <div className="mt-2 text-[11px] opacity-70 flex items-center gap-3">
                               <span>{formatTime(m.timestamp)}</span>
                               {m.durationMs !== undefined && (

@@ -1,53 +1,114 @@
 # yaml-language-server: $schema=https://promptfoo.dev/config-schema.json
-
-# Learn more about building a configuration: https://promptfoo.dev/docs/configuration/guide
-
-description: "LLM Sandbox Eval"
-
-prompts:
-  - 'Write a tweet about {{topic}}'
-  - 'Write a concise, funny tweet about {{topic}}'
-
-providers:
-  - id: https
+description: My Red Team Configuration
+targets:
+  - id: http
+    label: "Local API"
     config:
-      url: "http://localhost:3000/api/ask"
+      url: http://localhost:3000/api/ask
       method: POST
       headers:
         Content-Type: application/json
-      body:
-        prompt: "{{prompt}}"
+      body: |
+          {
+            "prompt": "{{prompt}}"
+          }
+      useHttps: false
+      tokenEstimation:
+        enabled: false
       transformResponse: |
         (response) => {
           try {
             const parsed = response.response;
-            return parsed; // only return the value
+            return parsed;
           } catch (e) {
             throw new Error("Failed to parse JSON: " + e.message + "\nRaw response: " + response);
           }
         }
-
-tests:
-  - vars:
-      topic: bananas
-    assert:
-      - type: icontains
-        value: banana
-      - type: javascript
-        value: "output.length <= 1000"
-
-  - vars:
-      topic: avocado toast
-    assert:
-      - type: icontains
-        value: avocado
-      - type: javascript
-        value: "output.length <= 2800"
-
-  - vars:
-      topic: new york city
-    assert:
-      - type: icontains
-        value: "nyc"
-      - type: javascript
-        value: "output.length <= 1000"
+    delay: 30000
+prompts:
+  - '{{prompt}}'
+redteam:
+  purpose: ''
+  plugins:
+    - id: bias:age  # Age-related bias detection
+    - id: bias:disability  # Disability-related bias detection
+    - id: bias:gender  # Gender-related bias detection
+    - id: bias:race  # Race-related bias detection
+    - id: contracts  # Tests for unauthorized contractual commitments and legal exposure
+    - id: excessive-agency  # Tests for unauthorized actions beyond defined system boundaries
+    - id: hallucination  # Tests for fabrication of false or misleading information
+    - id: harmful:chemical-biological-weapons  # Tests handling of WMD-related content
+    - id: harmful:child-exploitation  # Tests handling of child exploitation content
+    - id: harmful:copyright-violations  # Tests handling of intellectual property violations
+    - id: harmful:cybercrime  # Tests handling of cybercrime-related content
+    - id: harmful:cybercrime:malicious-code  # Tests creation of malicious code
+    - id: harmful:graphic-content  # Tests handling of graphic or violent content
+    - id: harmful:harassment-bullying  # Tests handling of harassment and bullying content
+    - id: harmful:hate  # Tests handling of hate speech and discriminatory content
+    - id: harmful:illegal-activities  # Tests handling of general illegal activities
+    - id: harmful:illegal-drugs  # Tests handling of illegal drug-related content
+    - id: harmful:illegal-drugs:meth  # Tests handling of methamphetamine-related content
+    - id: harmful:indiscriminate-weapons  # Tests handling of weapons-related content
+    - id: harmful:insults  # Tests handling of personal attacks and insults
+    - id: harmful:intellectual-property  # Tests handling of IP theft and violations
+    - id: harmful:misinformation-disinformation  # Tests handling of false information campaigns
+    - id: harmful:non-violent-crime  # Tests handling of non-violent criminal content
+    - id: harmful:privacy  # Tests handling of privacy violation attempts
+    - id: harmful:profanity  # Tests handling of profane or inappropriate language
+    - id: harmful:radicalization  # Tests handling of extremist content and recruitment
+    - id: harmful:self-harm  # Tests handling of self-harm and suicide content
+    - id: harmful:sex-crime  # Tests handling of sexual crime content
+    - id: harmful:sexual-content  # Tests handling of explicit sexual content
+    - id: harmful:specialized-advice  # Tests handling of unauthorized professional advice
+    - id: harmful:unsafe-practices  # Tests handling of dangerous activity instructions
+    - id: harmful:violent-crime  # Tests handling of violent crime content
+    - id: harmful:weapons:ied  # Tests handling of Improvised Explosive Devices
+    - id: hijacking  # Tests for unauthorized resource usage and purpose deviation
+    - id: pii:api-db  # Tests for PII exposure via API/database access
+    - id: pii:direct  # Tests for direct PII exposure vulnerabilities
+    - id: pii:session  # Tests for PII exposure in session data
+    - id: pii:social  # Tests for PII exposure via social engineering
+    - id: politics  # Tests handling of political content and bias
+    - id: competitors  # Tests for unauthorized competitor mentions and endorsements
+    - id: religion  # Tests handling of religious content and bias
+    - id: overreliance  # Tests for overreliance on system assumptions
+    - id: imitation  # Tests handling of unauthorized impersonation of entities
+    - id: ascii-smuggling  # Tests vulnerability to Unicode tag-based instruction smuggling attacks
+    - id: bfla  # Tests for broken function-level authorization vulnerabilities (OWASP API 5)
+    - id: bola  # Tests for broken object-level authorization vulnerabilities (OWASP API 1)
+    - id: debug-access  # Tests for exposed debugging interfaces and commands
+    - id: rbac  # Tests role-based access control implementation
+    - id: shell-injection  # Tests for command injection vulnerabilities
+    - id: sql-injection  # Tests for SQL injection vulnerabilities
+    - id: ssrf  # Tests for server-side request forgery vulnerabilities
+    - id: tool-discovery  # Tests for enumeration of available tools and function calls
+    - id: cross-session-leak  # Tests for information leakage between user sessions
+    - id: mcp  # Tests for vulnerabilities to Model Context Protocol (MCP) attacks
+    - id: divergent-repetition  # Tests for training data leaks through repetitive pattern exploitation that causes model divergence
+    - id: pii  # Tests handling of personal identifiable information
+    - id: agentic:memory-poisoning  # Tests whether an agent is vulnerable to memory poisoning attacks
+  strategies:
+    - id: basic  # Original plugin tests without any additional strategies or optimizations
+    - id: best-of-n  # Jailbreak technique published by Anthropic and Stanford
+    - id: base64  # Tests handling of Base64-encoded malicious payloads
+    - id: citation  # Exploits academic authority bias to bypass content filters
+    - id: emoji  # Tests handling of text hidden using emoji variation selectors
+    - id: camelcase  # Tests handling of text transformed into camelCase to potentially bypass filters
+    - id: gcg  # Greedy Coordinate Gradient adversarial suffix attack
+    - id: jailbreak:likert  # Uses Likert scale-based prompts to bypass content filters
+    - id: homoglyph  # Tests handling of homoglyph (visually similar Unicode characters) encoding to bypass filters
+    - id: hex  # Tests handling of hex-encoded malicious payloads
+    - id: leetspeak  # Tests handling of leetspeak-encoded malicious content
+    - id: math-prompt  # Tests handling of mathematical notation-based attacks
+    - id: morse  # Tests handling of content encoded in Morse code to potentially bypass filters
+    - id: piglatin  # Tests handling of content translated to Pig Latin to potentially bypass filters
+    - id: other-encodings  # Collection of alternative text transformation strategies (Morse code, Pig Latin, camelCase, and emoji variation selector smuggling) for testing evasion techniques
+    - id: multilingual  # Tests handling of attacks across multiple languages
+    - id: prompt-injection  # Tests for direct prompt injection vulnerabilities
+    - id: retry  # Automatically incorporates previously failed test cases to build a regression testing suite
+    - id: rot13  # Tests handling of ROT13-encoded malicious content
+  numTests: 1
+defaultTest:
+  vars: {}
+  options:
+    transformVars: '{ ...vars, sessionId: context.uuid }'

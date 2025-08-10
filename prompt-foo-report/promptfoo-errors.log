@@ -26,3 +26,32 @@ Raw response: [object Object] : {"response":"🍌 Did you know bananas are not o
 Raw response: [object Object] : {"response":"New York City: where every street tells a story, every corner holds a surprise, and the skyline is a testament to dreams reaching for the stars. 🌆✨ #NYC #CityThatNeverSleeps #UrbanAdventure"} : {"response":"New York City: where every street tells a story, every corner holds a surprise, and the skyline is a testament to dreams reaching for the stars. 🌆✨ #NYC #CityThatNeverSleeps #UrbanAdventure"} : {"response":{"cached":true,"data":"{\"response\":\"New York City: where every street tells a story, every corner holds a surprise, and the skyline is a testament to dreams reaching for the stars. 🌆✨ #NYC #CityThatNeverSleeps #UrbanAdventure\"}","status":200,"statusText":"OK","headers":{"connection":"keep-alive","content-type":"application/json","date":"Sat, 09 Aug 2025 17:01:16 GMT","keep-alive":"timeout=5","transfer-encoding":"chunked","vary":"RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Router-Segment-Prefetch"}}}. Data: {"response":"New York City: where every street tells a story, every corner holds a surprise, and the skyline is a testament to dreams reaching for the stars. 🌆✨ #NYC #CityThatNeverSleeps #UrbanAdventure"}. Text: {"response":"New York City: where every street tells a story, every corner holds a surprise, and the skyline is a testament to dreams reaching for the stars. 🌆✨ #NYC #CityThatNeverSleeps #UrbanAdventure"}. Context: {"response":{"cached":true,"data":"{\"response\":\"New York City: where every street tells a story, every corner holds a surprise, and the skyline is a testament to dreams reaching for the stars. 🌆✨ #NYC #CityThatNeverSleeps #UrbanAdventure\"}","status":200,"statusText":"OK","headers":{"connection":"keep-alive","content-type":"application/json","date":"Sat, 09 Aug 2025 17:01:16 GMT","keep-alive":"timeout=5","transfer-encoding":"chunked","vary":"RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Router-Segment-Prefetch"}}}.
 2025-08-09T17:48:48.063Z [ERROR]: [Http Provider] Error in response transform: Error: Transform failed: Failed to parse JSON: "[object Object]" is not valid JSON
 Raw response: [object Object] : {"response":"\"New York City: where the pigeons are as aggressive as the taxi drivers, and the only thing more expensive than rent is your morning coffee! ☕️🚕 #NYC\""} : {"response":"\"New York City: where the pigeons are as aggressive as the taxi drivers, and the only thing more expensive than rent is your morning coffee! ☕️🚕 #NYC\""} : {"response":{"cached":true,"data":"{\"response\":\"\\\"New York City: where the pigeons are as aggressive as the taxi drivers, and the only thing more expensive than rent is your morning coffee! ☕️🚕 #NYC\\\"\"}","status":200,"statusText":"OK","headers":{"connection":"keep-alive","content-type":"application/json","date":"Sat, 09 Aug 2025 17:01:15 GMT","keep-alive":"timeout=5","transfer-encoding":"chunked","vary":"RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Router-Segment-Prefetch"}}}. Data: {"response":"\"New York City: where the pigeons are as aggressive as the taxi drivers, and the only thing more expensive than rent is your morning coffee! ☕️🚕 #NYC\""}. Text: {"response":"\"New York City: where the pigeons are as aggressive as the taxi drivers, and the only thing more expensive than rent is your morning coffee! ☕️🚕 #NYC\""}. Context: {"response":{"cached":true,"data":"{\"response\":\"\\\"New York City: where the pigeons are as aggressive as the taxi drivers, and the only thing more expensive than rent is your morning coffee! ☕️🚕 #NYC\\\"\"}","status":200,"statusText":"OK","headers":{"connection":"keep-alive","content-type":"application/json","date":"Sat, 09 Aug 2025 17:01:15 GMT","keep-alive":"timeout=5","transfer-encoding":"chunked","vary":"RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Router-Segment-Prefetch"}}}.
+2025-08-10T06:15:31.226Z [ERROR]: [POST /providers/test] Error calling provider API
+error: Request failed after 1 retries: TypeError: fetch failed (Cause: Error: getaddrinfo ENOTFOUND api.example.com)
+providerOptions: {"id":"http","config":{"stateful":true,"request":"POST /v1/chat/completions HTTP/1.1
+Host: api.example.com
+Content-Type: application/json
+Authorization: Bearer {{api_key}}
+
+{
+  \"messages\": [
+    {
+      \"role\": \"user\",
+      \"content\": \"{{prompt}}\"
+    }
+  ]
+}","useHttps":true,"tokenEstimation":{"enabled":false},"sessionSource":"client"},"delay":30000}
+2025-08-10T07:03:36.815Z [ERROR]: Error running redteam: Error: Invariant failed: No target labels found in config. The retry strategy requires at least one target label to be specified.
+2025-08-10T07:09:43.893Z [ERROR]: Error running redteam: Error: Invariant failed: No target labels found in config. The retry strategy requires at least one target label to be specified.
+2025-08-10T07:18:12.550Z [ERROR]: An unexpected error occurred during red team run: Invariant failed: No target labels found in config. The retry strategy requires at least one target label to be specified.
+Error: Invariant failed: No target labels found in config. The retry strategy requires at least one target label to be specified.
+    at invariant (/private/tmp/bunx-501-promptfoo@latest/node_modules/promptfoo/dist/src/util/invariant.js:24:11)
+    at addRetryTestCases (/private/tmp/bunx-501-promptfoo@latest/node_modules/promptfoo/dist/src/redteam/strategies/retry.js:94:29)
+    at action (/private/tmp/bunx-501-promptfoo@latest/node_modules/promptfoo/dist/src/redteam/strategies/index.js:252:70)
+    at applyStrategies (/private/tmp/bunx-501-promptfoo@latest/node_modules/promptfoo/dist/src/redteam/index.js:266:41)
+    at synthesize (/private/tmp/bunx-501-promptfoo@latest/node_modules/promptfoo/dist/src/redteam/index.js:713:84)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async doGenerateRedteam (/private/tmp/bunx-501-promptfoo@latest/node_modules/promptfoo/dist/src/redteam/commands/generate.js:279:88)
+    at async doRedteamRun (/private/tmp/bunx-501-promptfoo@latest/node_modules/promptfoo/dist/src/redteam/shared.js:101:27)
+    at async Command.<anonymous> (/private/tmp/bunx-501-promptfoo@latest/node_modules/promptfoo/dist/src/redteam/commands/run.js:68:13)
+2025-08-10T07:26:24.349Z [ERROR]: Error in remote citation generation: TypeError: Cannot read properties of undefined (reading 'citation')

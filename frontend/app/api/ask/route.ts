@@ -5,7 +5,6 @@ export async function POST(req: Request) {
   try {
     // Parse JSON body from client
     const body = await req.json();
-
     // Forward the request to your external API
     const apiRes = await fetch(CHAT_END_POINT, {
       method: "POST",
@@ -20,7 +19,7 @@ export async function POST(req: Request) {
     // Get data from external API
     const data = await apiRes.json();
 
-    // Send it back to the client
+    // Send it back to the clientf
     return NextResponse.json(data, { status: apiRes.status });
   } catch (err) {
     console.error("Proxy error:", err);

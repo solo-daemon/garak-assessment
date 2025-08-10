@@ -1,0 +1,19 @@
+{
+    "rest": {
+       "RestGenerator": {
+          "name": "chat service",
+          "uri": "http://localhost:3000/api/ask",
+          "method": "post",
+          "headers": {
+             "X-Authorization": "$KEY",
+             "Content-Type": "application/json"
+          },
+          "req_template_json_object": {
+             "prompt": "$INPUT"
+          },
+          "response_json": true,
+          "response_json_field": "response",
+          "request_timeout": 80
+       }
+    }
+ }
