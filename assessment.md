@@ -27,7 +27,7 @@ This document compares **NVIDIA/garak**, **promptfoo/promptfoo**, and **Azure/Py
 | **Encoding / Smuggling (Base64, QP, rot13, leet, zero-width, etc.)**                        | ✅ | ➖(partially covered like rot13 , base64) | ➖ |
 | **Advanced Encoding / Homograph + Unicode mixing**                                         | ➖ (unicode mixing, no homograph)| ➖ | ❌ |
 | **Filter Deactivation Templates ("turn off safety mode")**                                 | ➖ | ✅ | ➖ |
-| **Multi-turn Adaptive Attacks (refine payload using model feedback)**                      | ➖ (saw an implementation of atkgen, not sure if it's the same thing)| ✅ | ✅ |
+| **Multi-turn Adaptive Attacks (refine payload using model feedback)**                      | ➖ (saw an implementation of atkgen, not sure if it's the same thing, also a strategy for visual jailbreak)| ✅ | ✅ |
 | **PII / Personal Data Exfiltration**                                                        | ➖ | ✅ | ✅ |
 | **RAG / Context Exfiltration**                                                              | ❌ | ✅ | ✅ |
 | **Paraphrase / Morphing / Variant Generators**                                              | ➖ | ✅ | ✅ |
