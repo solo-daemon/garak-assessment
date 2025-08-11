@@ -24,14 +24,14 @@ This document compares **NVIDIA/garak**, **promptfoo/promptfoo**, and **Azure/Py
 | Attack Category / Strategy                                                                 | **garak** | **promptfoo** | **PyRIT** |
 |---------------------------------------------------------------------------------------------|-----------|---------------|-----------|
 | **Prompt Injection / Jailbreaks**                                                          | ✅ | ✅ | ✅ |
-| **Encoding / Smuggling (Base64, QP, rot13, leet, zero-width, etc.)**                        | ✅ | ➖ | ➖ |
-| **Advanced Encoding / Homograph + Unicode mixing**                                         | ➖ | ➖ | ❌ |
+| **Encoding / Smuggling (Base64, QP, rot13, leet, zero-width, etc.)**                        | ✅ | ➖(partially covered like rot13 , base64) | ➖ |
+| **Advanced Encoding / Homograph + Unicode mixing**                                         | ➖ (unicode mixing, no homograph)| ➖ | ❌ |
 | **Filter Deactivation Templates ("turn off safety mode")**                                 | ➖ | ✅ | ➖ |
-| **Multi-turn Adaptive Attacks (refine payload using model feedback)**                      | ➖ | ✅ | ✅ |
+| **Multi-turn Adaptive Attacks (refine payload using model feedback)**                      | ➖ (saw an implementation of atkgen, not sure if it's the same thing)| ✅ | ✅ |
 | **PII / Personal Data Exfiltration**                                                        | ➖ | ✅ | ✅ |
 | **RAG / Context Exfiltration**                                                              | ❌ | ✅ | ✅ |
 | **Paraphrase / Morphing / Variant Generators**                                              | ➖ | ✅ | ✅ |
-| **Social Engineering / Role-play Bypass**                                                   | ➖ | ✅ | ✅ |
+| **Social Engineering / Role-play Bypass**                                                   | ➖(found some goodside and grandma attacks) | ✅ | ✅ |
 | **Brand Abuse / Policy Violation Content**                                                  | ❌ | ✅ | ➖ |
 | **Bias Induction (age, gender, race, disability)**                                          | ✅ | ✅ | ➖ |
 | **Toxicity Induction / NSFW Content**                                                       | ✅ | ✅ | ➖ |
